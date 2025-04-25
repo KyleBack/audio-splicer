@@ -86,14 +86,11 @@ def execute(splice_videos_request: SpliceVideosRequest):
 
             if index == 0:
                 # Export first audio segment to combined m4a file
-                #new_segment.export(COMBINED_AUDIO_FILE_NAME)
                 combined_segment = new_segment
             else:
                 # Splice audio segments together in combined m4a file
-                #combined_segment = AudioSegment.from_file(COMBINED_AUDIO_FILE_NAME)
                 combined_segment = (combined_segment + AudioSegment.silent(splice_videos_request.splice_offset * 1000)
                                     + new_segment)
-                #combined_segment.export(COMBINED_AUDIO_FILE_NAME)
         else:
             raise make_response(f"Error occurred while downloading YouTube Video. Error code: {error_code}", 500)
 

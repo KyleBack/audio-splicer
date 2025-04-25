@@ -36,11 +36,5 @@ def splice_videos():
 
     return execute(splice_videos_request)
 
-@app.route('/search-videos', methods=['GET'])
-def search_videos():
-    request_json = request.get_json()
-    if request_json is None:
-        raise BadRequest('Request body not included.')
-
 if __name__ == '__main__':
     app.run()
