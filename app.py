@@ -1,3 +1,5 @@
+import sys
+
 from flask_cors import CORS
 
 from splice_videos import *
@@ -41,4 +43,5 @@ def splice_videos():
     return execute(splice_videos_request)
 
 if __name__ == '__main__':
+    sys.path.append(f'{os.getcwd()}/ffmpeg-master-latest-win64-gpl-shared/bin')
     app.run()
