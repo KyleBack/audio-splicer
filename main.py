@@ -26,6 +26,10 @@ def handle_exception(e):
     response.content_type = "application/json"
     return response
 
+@app.route("/")
+def home_view():
+        return "<h1>Welcome to Audio Splicer! Go to GitHub for more info: https://github.com/KyleBack/audio-splicer</h1>"
+
 @app.route('/splice-videos', methods=['POST'])
 def splice_videos():
     request_json = request.get_json()
