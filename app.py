@@ -44,4 +44,5 @@ def splice_videos():
 
 if __name__ == '__main__':
     sys.path.append(f'{os.getcwd()}/ffmpeg.exe')
+    sys.path.append(f'{os.getcwd()}/ffprobe.exe')
     app.run()
