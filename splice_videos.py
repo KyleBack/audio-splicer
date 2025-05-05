@@ -128,7 +128,6 @@ def download_video(video_id: str, start: float, end: float):
         'external_downloader_args': ffmpeg_args,
         'progress_hooks': [yt_dlp_hook_partial],
         'outtmpl': f'{os.getcwd()}/{TEMP_FILE_DIR_NAME}/%(title)s.%(ext)s',
-        'cookiefile': f'{os.getcwd()}/youtube_cookies.txt',
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
