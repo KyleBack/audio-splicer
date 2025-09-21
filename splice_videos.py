@@ -2,6 +2,7 @@ from flask import send_file, make_response
 from werkzeug.exceptions import BadRequest
 from werkzeug.utils import secure_filename
 from pydub import AudioSegment
+from pydub.effects import normalize
 from functools import partial
 from queue import LifoQueue
 from typing import List, Final
@@ -97,7 +98,7 @@ def execute(splice_videos_request: SpliceVideosRequest):
     # Delete contents of /temp directory
     shutil.rmtree(TEMP_FILE_DIR_NAME)
 
-    combined_segment.export(COMBINED_AUDIO_FILE_NAME)
+    normalize(combined_segment).export(COMBINED_AUDIO_FILE_NAME)
 
     try:
         # Send combined audio file
@@ -128,6 +129,7 @@ def download_video(video_id: str, start: float, end: float):
         'external_downloader_args': ffmpeg_args,
         'progress_hooks': [yt_dlp_hook_partial],
         'outtmpl': f'{os.getcwd()}/{TEMP_FILE_DIR_NAME}/%(title)s.%(ext)s',
+        'cookiesfrombrowser': ("chrome",)
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
